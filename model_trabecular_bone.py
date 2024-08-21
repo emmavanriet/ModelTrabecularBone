@@ -236,7 +236,7 @@ def model_concentric(mask_path, result_path, bone, degree, offset_q0, offset_r0,
         # Read in the trabecular bone mask slice per slice
         file_path = os.path.join(mask_path, mask_file)
         mask = cv2.cvtColor(cv2.imread(file_path), cv2.COLOR_BGR2GRAY)
-        mask = rotate_counterclockwise(mask, degree=degree)
+        mask = rotate_clockwise(mask, degree=degree)
         mask = np.asarray(mask)
 
         map_size = mask.shape[0] # size of the images
@@ -259,7 +259,7 @@ def model_concentric(mask_path, result_path, bone, degree, offset_q0, offset_r0,
 
         # Mask the created structures
         image = cv2.bitwise_and(result, result, mask=mask)
-        image = rotate_clockwise(image, degree=degree)
+        image = rotate_counterclockwise(image, degree=degree)
 
         # Binarize the images
         _, otsu_threshold = cv2.threshold(image, 0, 255,
@@ -273,10 +273,10 @@ def model_concentric(mask_path, result_path, bone, degree, offset_q0, offset_r0,
                 middle_file = bmp_files[middle_index]
                 middle_file_path = os.path.join(mask_path, middle_file)
                 mask_middle = cv2.cvtColor(cv2.imread(middle_file_path), cv2.COLOR_BGR2GRAY)
-                mask_middle = rotate_counterclockwise(mask_middle, degree=degree)
+                mask_middle = rotate_clockwise(mask_middle, degree=degree)
                 mask_middle = np.asarray(mask_middle)
                 image_middle = cv2.bitwise_and(result, result, mask=mask_middle)
-                image_middle = rotate_clockwise(image_middle, degree=degree)
+                image_middle = rotate_counterclockwise(image_middle, degree=degree)
                 _, otsu_threshold_middle = cv2.threshold(image_middle, 0, 255,
                                                          cv2.THRESH_BINARY + cv2.THRESH_OTSU)
                 image_middle = otsu_threshold_middle
@@ -294,7 +294,7 @@ def model_concentric(mask_path, result_path, bone, degree, offset_q0, offset_r0,
         os.makedirs(mask_ouput_file, exist_ok=True)
 
         mask_ouput_file = os.path.join(mask_ouput_file, mask_file)
-        mask = rotate_clockwise(mask, degree=degree)
+        mask = rotate_counterclockwise(mask, degree=degree)
         cv2.imwrite(mask_ouput_file, mask)
 
         # set the i-1 as the noise map that was just used
@@ -322,7 +322,7 @@ def model_nonconcentric(mask_path, result_path, bone, degree, plot):
         # Read in the trabecular bone mask slice per slice
         file_path = os.path.join(mask_path, mask_file)
         mask = cv2.cvtColor(cv2.imread(file_path), cv2.COLOR_BGR2GRAY)
-        mask = rotate_counterclockwise(mask, degree=degree)
+        mask = rotate_clockwise(mask, degree=degree)
         mask = np.asarray(mask)
 
         map_size = mask.shape[0] # size of the images
@@ -356,7 +356,7 @@ def model_nonconcentric(mask_path, result_path, bone, degree, plot):
 
         # Mask the created structures
         image = cv2.bitwise_and(result, result, mask=mask)
-        image = rotate_clockwise(image, degree=degree)
+        image = rotate_counterclockwise(image, degree=degree)
 
         # Binarize the images
         _, otsu_threshold = cv2.threshold(image, 0, 255,
@@ -369,10 +369,10 @@ def model_nonconcentric(mask_path, result_path, bone, degree, plot):
             middle_file = bmp_files[middle_index]
             middle_file_path = os.path.join(mask_path, middle_file)
             mask_middle = cv2.cvtColor(cv2.imread(middle_file_path), cv2.COLOR_BGR2GRAY)
-            mask_middle = rotate_counterclockwise(mask_middle, degree=degree)
+            mask_middle = rotate_clockwise(mask_middle, degree=degree)
             mask_middle = np.asarray(mask_middle)
             image_middle = cv2.bitwise_and(result, result, mask=mask_middle)
-            image_middle = rotate_clockwise(image_middle, degree=degree)
+            image_middle = rotate_counterclockwise(image_middle, degree=degree)
             _, otsu_threshold_middle = cv2.threshold(image_middle, 0, 255,
                                               cv2.THRESH_BINARY + cv2.THRESH_OTSU)
             image_middle = otsu_threshold_middle
@@ -390,7 +390,7 @@ def model_nonconcentric(mask_path, result_path, bone, degree, plot):
         os.makedirs(mask_ouput_file, exist_ok=True)
 
         mask_ouput_file = os.path.join(mask_ouput_file, mask_file)
-        mask = rotate_clockwise(mask, degree=degree)
+        mask = rotate_counterclockwise(mask, degree=degree)
         cv2.imwrite(mask_ouput_file, mask)
 
         # set the i-1 as the noise map that was just used
