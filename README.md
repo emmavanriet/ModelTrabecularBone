@@ -33,8 +33,8 @@ An example of an input for concenctric structures is the following:
 |||
 |-----------------------|-----------------|
 |**Author / Master Student** | Emma Van Riet| 
-|**Author / PhD Candidate** | Karen Merken|
-|**P.I.**| Hilde Bosmans |
+|**Mentor** | Karen Merken|
+|**Supervisor**| Hilde Bosmans |
 |**Department** | Medical Physics & Quality Assesment, Radiology|
 |**Institution** | KU Leuven |
 
